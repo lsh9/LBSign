@@ -1,0 +1,71 @@
+<view wx:if="{{login}}">
+
+  <view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
+    <!-- <navigator class="weui-btn weui-btn_mini weui-btn_default weui-wa-hotarea" aria-role="button" url="javascript:">
+      <mp-icon icon="qr-code" color="black" size="{{25}}"></mp-icon>
+    </navigator> -->
+
+    <form class="weui-search-bar__form" aria-role="combobox" aria-haspopup="true" aria-expanded="{{inputVal.length > 0 ? 'true' : 'false'}}" aria-owns="searchResult">
+      <view class="weui-search-bar__box" aria-role="button">
+        <i class="weui-icon-search"></i>
+        <input aria-controls="searchResult" type="text" class="weui-search-bar__input" placeholder="请输入签到码" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="confirmInputCode" confirm-type="search" bindblur="hideInput"/>
+        <i class="weui-icon-delete"c aria-label="清除" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></i>
+        <!-- <view aria-role="button" aria-label="清除" class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></view> -->
+      </view>
+      <label class="weui-search-bar__label" bindtap="showInput">
+        <i class="weui-icon-search"></i>
+        <span class="weui-search-bar__text">签到码</span>
+      </label>
+    </form>
+    <!-- <view aria-role="button" class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view> -->
+    <navigator class="weui-btn weui-btn_mini weui-btn_default weui-wa-hotarea" aria-role="button" url="/pages/course/create" bindtap="handleSign">
+      <mp-icon icon="add" color="black" size="{{25}}"></mp-icon>
+    </navigator>
+  </view>
+
+  <view class="container">
+    
+    <view class="userinfo">
+      <view class="userinfo-avatar" bindtap="bindAvatarTap">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+
+      <block wx:if="{{userName && userNumber}}" style="text-align: center;">
+        <view>
+          {{userName}}
+        </view>
+        <view>
+          {{userNumber}}
+        </view>
+      </block>
+      <block wx:else>
+        <open-data type="userNickName"></open-data>
+      </block>
+    </view>
+
+  </view>
+
+  <view class="weui-cells__title">历史</view>
+  <view class="weui-cells weui-cells_after-title">
+    <navigator url="../history/my" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd" id="js_cell_l1_bd" aria-hidden="true">
+        <view>我创建的课程</view>
+      </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access" aria-hidden="true"></view>
+    </navigator>
+    <navigator url="../history/other" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd" id="js_cell_l1_bd" aria-hidden="true">
+        <view>我参与的签到</view>
+      </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access" aria-hidden="true"></view>
+    </navigator>
+  </view>
+
+  <!-- <mp-icon icon="add" color="black" size="{{64}}"></mp-icon> -->
+
+</view>
+
+<!-- 未登录状态 -->
+<view wx:else class="container">
+  <button type="default" bindtap="handleLogin">连接到服务器</button>
+</view>

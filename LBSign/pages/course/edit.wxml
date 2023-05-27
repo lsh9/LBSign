@@ -1,0 +1,34 @@
+
+<mp-form-page title="创建课程">
+
+<view class="weui-cells__title">课程名称</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_active">
+    <view class="weui-cell__bd">
+      <input class="weui-input" placeholder-class="weui-input__placeholder" placeholder="请输入课程名称" bindinput="handleCourseNameInput" />
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells__title">课程描述</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_active">
+    <view class="weui-cell__bd">
+      <textarea class="weui-textarea" placeholder-class="weui-input__placeholder" placeholder="请输入课程描述" style="height: 5.3em;" bindinput="handleCourseDescInput" />
+    </view>
+  </view>
+</view>
+
+<!-- <view class="weui-cells__title">课程定位（可选）</view>
+<view class="weui-cells weui-cells_after-title">
+  <input wx:if="{{isLocated}}" class="weui-input" placeholder-class="weui-input__placeholder" disabled="true">{{location.name}}</input>
+
+  <slider min="50" max="500" step="10" value="{{validDistance}}" show-value="true" bindchanging="handleSliderChanging"></slider>
+  <button class="weui-btn" type="default" bindtap="tapChoose">选择位置</button>
+  <button class="weui-btn" type="default" bindtap="tapCancel">取消定位</button>
+</view> -->
+
+<view slot="button">
+  <button class="weui-btn" type="primary" bindtap="tapCreate">修改</button>
+</view>
+</mp-form-page>

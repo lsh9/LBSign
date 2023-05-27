@@ -1,0 +1,45 @@
+<mp-form-page title="{{title}}">
+
+  <view class="weui-cells__title">课程名称</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_active">
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder-class="weui-input__placeholder" placeholder="请输入课程名称" bindinput="handleCourseNameInput" value="{{courseName}}" />
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">课程描述</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_active">
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" placeholder-class="weui-input__placeholder" placeholder="请输入课程描述" style="height: 5.3em;" bindinput="handleCourseDescInput" value="{{courseDesc}}" />
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">课程定位（可选）</view>
+  <view class="weui-cells weui-cells_after-title">
+    <button class="weui-btn" type="default" bindtap="tapChoose">选择位置</button>
+
+    <mp-cells wx:if="{{isLocated}}">
+      <mp-cell title="定位点：">
+        <label>{{location.name}}</label>
+      </mp-cell>
+      <mp-cell title="详细地址：">
+        <label>{{location.address}}</label>
+      </mp-cell>
+    </mp-cells>
+
+    <button wx:if="{{isLocated}}" class="weui-btn" type="default" bindtap="tapCancel">取消定位</button>
+
+    <mp-cell wx:if="{{isLocated}}" title="有效距离（米）">
+      <slider min="50" max="500" step="10" value="{{validDistance}}" show-value="true" bindchanging="handleSliderChanging"></slider>
+    </mp-cell>
+  </view>
+
+  <view slot="button">
+    <button wx:if="{{isEditing}}" class="weui-btn" type="primary" bindtap="tapSave">保存</button>
+    <button wx:else class="weui-btn" type="primary" bindtap="tapCreate">创建</button>
+  </view>
+</mp-form-page>

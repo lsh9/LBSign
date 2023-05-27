@@ -1,0 +1,17 @@
+<mp-form-page title="个人签到信息设置">
+
+  <mp-cells title="请设置信息用于参与签到">
+    <mp-cell title="姓名">
+      <input type="text" value="{{userName}}" bindinput="handleNameInput" />
+    </mp-cell>
+    <mp-cell title="学号">
+      <input type="number" value="{{userNumber}}" bindinput="handleStuIdInput" />
+    </mp-cell>
+  </mp-cells>
+
+
+  <view slot="button">
+    <button class="weui-btn" type="primary" bindtap="handleEdit">保存</button>
+    <button class="weui-btn" type="primary" bindtap="handleCancel">取消</button>
+  </view>
+</mp-form-page>

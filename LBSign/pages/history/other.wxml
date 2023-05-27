@@ -1,0 +1,85 @@
+<!-- 
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells">
+
+      <view wx:for="{{userSigns}}" wx:key="userSignId">
+        <mp-slideview buttons="{{buttons[i]}}" bindbuttontap="slideButtonTap">
+          <mp-cell value="{{item.sign.signName}}" footer="{{item.sign.signCode}}"></mp-cell>
+        </mp-slideview>
+      </view>
+
+    </view>
+  </view>
+</view> -->
+
+<page-meta root-font-size="system" />
+
+<view class="page" data-weui-theme="light" data-weui-mode="care">
+
+  <view class="page__hd">
+    <block wx:if="{{userName && userNumber}}" style="text-align: center;">
+      <view class="page__title">{{userName}}</view>
+      <view class="page__desc">{{userNumber}}</view>
+    </block>
+    <block wx:else>
+      <open-data class="page__desc" type="userNickName"></open-data>
+    </block>
+
+    <!-- 下载按钮 -->
+  </view>
+
+  <view class="page__bd">
+
+    <view class="weui-form-preview" wx:for="{{userSigns}}" wx:key="userSignId">
+
+      <view class="weui-form-preview__hd" aria-role="option">
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">签到名称</label>
+          <em class="weui-form-preview__value">{{item.sign.signName}}</em>
+        </view>
+      </view>
+
+      <view aria-labelledby="p1 js_a11y_comma p2 js_a11y_comma p3" class="weui-form-preview__bd" aria-role="option">
+        <view id="p1" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">签到码</label>
+          <text class="weui-form-preview__value">{{item.sign.signCode}}</text>
+        </view>
+        <view id="p1" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">开始时间</label>
+          <text class="weui-form-preview__value">{{item.sign.startTime}}</text>
+        </view>
+        <view id="p2" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">结束时间</label>
+          <text class="weui-form-preview__value">{{item.sign.endTime}}</text>
+        </view>
+        <view id="p2" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">签到时间</label>
+          <text class="weui-form-preview__value">{{item.signTime}}</text>
+        </view>
+
+        <view wx:if="{{item.sign.validDistance!=0}}">
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">签到经度</label>
+            <text class="weui-form-preview__value">{{item.sign.signLongitude}}</text>
+          </view>
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">签到纬度</label>
+            <text class="weui-form-preview__value">{{item.sign.signLatitude}}</text>
+          </view>
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">签到距离</label>
+            <text class="weui-form-preview__value">{{item.sign.validDistance}}米</text>
+          </view>
+
+        </view>
+      </view>
+
+      <view class="weui-form-preview__ft">
+        <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_default" aria-role="button" bindtap="handleGoTo" data-signCode="{{item.sign.signCode}}">查看</button>
+      </view>
+
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,66 @@
+<page-meta root-font-size="system" />
+
+<view class="page" data-weui-theme="light" data-weui-mode="care">
+
+  <view class="page__hd">
+    <view class="page__title">{{course.courseName}}</view>
+    <view class="page__desc">{{course.courseDescription}}</view>
+    <!-- 下载按钮 -->
+  </view>
+
+  <view class="page__bd">
+
+    <view class="weui-form-preview" wx:for="{{signs}}" wx:key="signId">
+
+      <view class="weui-form-preview__hd" aria-role="option">
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">签到名称</label>
+          <em class="weui-form-preview__value">{{item.signName}}</em>
+        </view>
+      </view>
+
+      <view aria-labelledby="p1 js_a11y_comma p2 js_a11y_comma p3" class="weui-form-preview__bd" aria-role="option">
+        <view id="p1" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">签到码</label>
+          <text class="weui-form-preview__value">{{item.signCode}}</text>
+        </view>
+        <view id="p1" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">开始时间</label>
+          <text class="weui-form-preview__value">{{item.startTime}}</text>
+        </view>
+        <view id="p2" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">结束时间</label>
+          <text class="weui-form-preview__value">{{item.endTime}}</text>
+        </view>
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">签到人数</label>
+          <text class="weui-form-preview__value">{{item.signCount}}</text>
+        </view>
+
+        <view wx:if="{{item.validDistance!=0}}">
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">签到经度</label>
+            <text class="weui-form-preview__value">{{item.signLongitude}}</text>
+          </view>
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">签到纬度</label>
+            <text class="weui-form-preview__value">{{item.signLatitude}}</text>
+          </view>
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">签到距离</label>
+            <text class="weui-form-preview__value">{{item.validDistance}}米</text>
+          </view>
+
+        </view>
+      </view>
+
+      <view class="weui-form-preview__ft">
+        <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_default" aria-role="button" bindtap="handleDownload" data-signId="{{item.signId}}">下载</button>
+        <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_default" aria-role="button" bindtap="handleGoTo" data-signCode="{{item.signCode}}">查看</button>
+        <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_warning" aria-role="button" bindtap="handleDelete" data-signId="{{item.signId}}">删除</button>
+      </view>
+
+    </view>
+  </view>
+
+</view>

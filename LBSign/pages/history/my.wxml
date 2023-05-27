@@ -1,0 +1,14 @@
+
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells">
+
+      <view wx:for="{{courses}}" wx:key="courseId">
+        <mp-slideview id="{{index}}" buttons="{{buttons[index]}}" bindbuttontap="slideButtonTap" bindtap="handleSlideTap">
+          <mp-cell value="{{item.courseName}}" footer="{{item.courseDescription}}"></mp-cell>
+        </mp-slideview>
+      </view>
+
+    </view>
+  </view>
+</view>

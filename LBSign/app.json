@@ -1,0 +1,75 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/map/map",
+    "pages/home/edit",
+    "pages/history/my",
+    "pages/history/other",
+    "pages/course/create",
+    "pages/course/edit",
+    "pages/course/detail",
+    "pages/sign/create",
+    "pages/sign/participate"
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "/assets/home.png",
+        "selectedIconPath": "/assets/home-fill.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/map/map",
+        "iconPath": "/assets/map.png",
+        "selectedIconPath": "/assets/map-fill.png",
+        "text": "地图"
+      }
+    ]
+  },
+  "resolveAlias": {
+    "~/*": "/*",
+    "~/origin/*": "origin/*",
+    "@utils/*": "utils/*",
+    "subBUtils/*": "subpackageB/utils/*"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "requiredPrivateInfos": [
+    "chooseAddress",
+    "chooseLocation",
+    "choosePoi",
+    "getLocation",
+    "onLocationChange",
+    "startLocationUpdateBackground",
+    "startLocationUpdate"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "LBSign",
+    "navigationBarTextStyle": "black"
+  },
+  "useExtendedLib": {
+    "weui": true
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-tabbar": "weui-miniprogram/tabbar/tabbar",
+    "mp-dialog": "weui-miniprogram/dialog/dialog",
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+    "mp-form-page": "weui-miniprogram/form-page/form-page",
+    "mp-form": "weui-miniprogram/form/form",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-checkbox-group": "weui-miniprogram/checkbox-group/checkbox-group",
+    "mp-checkbox": "weui-miniprogram/checkbox/checkbox",
+    "mp-slideview": "weui-miniprogram/slideview/slideview"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
