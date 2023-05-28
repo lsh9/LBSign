@@ -8,8 +8,8 @@
     <form class="weui-search-bar__form" aria-role="combobox" aria-haspopup="true" aria-expanded="{{inputVal.length > 0 ? 'true' : 'false'}}" aria-owns="searchResult">
       <view class="weui-search-bar__box" aria-role="button">
         <i class="weui-icon-search"></i>
-        <input aria-controls="searchResult" type="text" class="weui-search-bar__input" placeholder="请输入签到码" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="confirmInputCode" confirm-type="search" bindblur="hideInput"/>
-        <i class="weui-icon-delete"c aria-label="清除" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></i>
+        <input aria-controls="searchResult" type="text" class="weui-search-bar__input" placeholder="请输入签到码" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="confirmInputCode" confirm-type="search" bindblur="hideInput" />
+        <i class="weui-icon-delete" c aria-label="清除" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></i>
         <!-- <view aria-role="button" aria-label="清除" class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></view> -->
       </view>
       <label class="weui-search-bar__label" bindtap="showInput">
@@ -24,11 +24,14 @@
   </view>
 
   <view class="container">
-    
+
     <view class="userinfo">
       <view class="userinfo-avatar" bindtap="bindAvatarTap">
         <open-data type="userAvatarUrl"></open-data>
       </view>
+      <!-- <button class="avatar-wrapper" bindtap="bindAvatarTap">
+        <image class="avatar" src="{{avatarUrl}}"></image>
+      </button> -->
 
       <block wx:if="{{userName && userNumber}}" style="text-align: center;">
         <view>
@@ -39,6 +42,9 @@
         </view>
       </block>
       <block wx:else>
+        <!-- <view>
+          {{nickName}}
+        </view> -->
         <open-data type="userNickName"></open-data>
       </block>
     </view>
@@ -67,5 +73,6 @@
 
 <!-- 未登录状态 -->
 <view wx:else class="container">
-  <button type="default" bindtap="handleLogin">连接到服务器</button>
+
+  <button type="default" bindtap="handleLogin">登录</button>
 </view>

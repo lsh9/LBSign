@@ -166,14 +166,57 @@ Page({
    */
   onLoad(options) {
     that = this;
-    var sign = JSON.parse(options.sign);
-    util.transformSign(sign);
-    that.setData({
-      timer: null,
-      sign: sign,
-      valid: true
-    })
-    this.countDown();
+    var signCode = options.signCode;
+    if (signCode) {
+      wx.showLoading({
+        title: '正在查询',
+      })
+      wx.request({
+        url: app.domain + "/sign/get_sign_by_signCode",
+        method: "POST",
+        data: {
+          "signCode": signCode
+        },
+        success: (res) => {
+          var resp = res.data;
+          if (resp.success) {
+            var sign = resp.sign
+            console.log(sign)
+            if (sign) {
+              util.transformSign(sign);
+              that.setData({
+                timer: null,
+                sign: sign,
+                valid: true
+              })
+              this.countDown();
+            } else {
+              // 签到码无效
+              wx.showModal({
+                title: '签到已超时',
+                content: '点击回到主页',
+                showCancel: false,
+                complete: (res) => {
+                  wx.redirectTo({
+                    url: '/pages/home/home',
+                  })
+                }
+              })
+
+            }
+          }
+        },
+      })
+    } else {
+      var sign = JSON.parse(options.sign);
+      util.transformSign(sign);
+      that.setData({
+        timer: null,
+        sign: sign,
+        valid: true
+      })
+      this.countDown();
+    }
   },
 
   /**
@@ -220,10 +263,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
+    var signCode = this.data.sign.signCode
     return {
-      title: '签到码：' + this.data.sign.signCode,
+      title: '签到码：' + signCode,
       desc: 'LBSign课堂签到',
-      path: '/pages/home/home?signCode=' + this.data.sign.signCode // 路径，传递参数到指定页面。
+      path: '/pages/sign/participate?signCode=' + signCode // 路径，传递参数到指定页面。
     }
   }
 })

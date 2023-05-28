@@ -40,8 +40,8 @@ const getDistance = (lat1, lng1, lat2, lng2) => {
 }
 
 const transformSign = (sign) => {
-  sign.signLatitude = sign.signLatitude / 1e6;
-  sign.signLongitude = sign.signLongitude / 1e6;
+  sign.latitude = sign.signLatitude / 1e6;
+  sign.longitude = sign.signLongitude / 1e6;
   sign.startTime = timestampsToHMS(sign.startTimeStamps * 1000)
   sign.endTime = timestampsToHMS(sign.endTimeStamps * 1000)
 }

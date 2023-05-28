@@ -4,6 +4,7 @@ const util = require("@utils/util")
 Page({
 
   /**
+   * 
    * 页面的初始数据
    */
   data: {
@@ -42,9 +43,11 @@ Page({
             signs: signs
           })
         }
+      },
+      complete: () => {
+        wx.hideLoading();
       }
     })
-    wx.hideLoading();
   },
 
 
@@ -90,6 +93,26 @@ Page({
 
   },
 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage(e) {
+    console.log("课程签到分享：", e)
+    if (e.target){
+      var signCode = e.target.dataset.signcode;
+      return {
+        title: '签到码：' + signCode,
+        desc: 'LBSign课堂签到',
+        path: '/pages/sign/participate?signCode=' + signCode // 路径，传递参数到指定页面。
+      }
+    }
+    else{
+      return {
+        title: 'LBSign课堂签到',
+        path: '/pages/home/home'
+      }
+    }
+  },
 
   handleDownload(e) {
     wx.request({
@@ -121,8 +144,10 @@ Page({
 
   handleGoTo(e) {
     var signCode = e.target.dataset.signcode;
-    var index = parseInt(e.target.id)
-    var sign = JSON.stringify(this.data.signs[index])
+    var index = parseInt(e.target.id);
+    var sign = this.data.signs[index];
+    sign.course = this.data.course;
+    sign = JSON.stringify(sign)
     wx.navigateTo({
       url: '/pages/sign/participate?sign=' + sign,
     })

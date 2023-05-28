@@ -40,9 +40,11 @@ Page({
             userSigns: resp.userSigns
           })
         }
+      },
+      complete: () => {
+        wx.hideLoading()
       }
     })
-    wx.hideLoading()
   },
 
   /**
@@ -87,6 +89,28 @@ Page({
 
   },
 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage(e) {
+    console.log("历史签到分享：", e)
+    if (e.target){
+      var signCode = e.target.dataset.signcode;
+      return {
+        title: '签到码：' + signCode,
+        desc: 'LBSign课堂签到',
+        path: '/pages/sign/participate?signCode=' + signCode // 路径，传递参数到指定页面。
+      }
+    }
+    else{
+      return {
+        title: 'LBSign课堂签到',
+        path: '/pages/home/home'
+      }
+    }
+
+  },
+
   handleGoTo(e) {
     var index = parseInt(e.target.id);
     var sign = this.data.userSigns[index].sign;
@@ -95,4 +119,5 @@ Page({
       url: '/pages/sign/participate?sign=' + JSON.stringify(sign),
     })
   },
+  
 })

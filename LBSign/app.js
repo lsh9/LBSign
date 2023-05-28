@@ -1,5 +1,7 @@
 App({
   onLaunch() {
+
+
     console.log("app.onLaunch")
     var _this = this
     const waitOnLoad = function () {

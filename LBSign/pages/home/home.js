@@ -1,5 +1,6 @@
 const app = getApp();
 let that = null
+const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
 
 Page({
 
@@ -9,6 +10,7 @@ Page({
   data: {
     userName: "",
     userNumber: "",
+    avatarUrl: defaultAvatarUrl,
 
     inputShowed: false,
     inputVal: '',
@@ -25,6 +27,7 @@ Page({
 
   // 跳转到个人信息设置
   bindAvatarTap() {
+
     wx.navigateTo({
       url: '/pages/home/edit',
     })
@@ -150,8 +153,9 @@ Page({
     that = this;
     that.setData({
       login: app.globalData.login,
-      userNumber: app.globalData.user.userName,
-      userNumber: app.globalData.user.userNumber
+      userName: app.globalData.user.userName,
+      userNumber: app.globalData.user.userNumber,
+      avatarUrl: app.globalData.user.avatarUrl,
     });
 
     // 链接进入，参数有签到码
@@ -190,6 +194,7 @@ Page({
       this.setData({
         userName: user.userName,
         userNumber: user.userNumber,
+        avatarUrl: user.avatarUrl,
       })
     }
 
@@ -245,6 +250,7 @@ Page({
       this.setData({
         userName: user.userName,
         userNumber: user.userNumber,
+        avatarUrl: user.avatarUrl,
       })
     }
   },

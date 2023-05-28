@@ -1,3 +1,9 @@
+<!-- <view data-weui-theme="{{theme}}">
+  <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+    <image class="avatar" src="{{avatarUrl}}"></image>
+  </button> 
+</view> -->
+
 <mp-form-page title="个人签到信息设置">
 
   <mp-cells title="请设置信息用于参与签到">

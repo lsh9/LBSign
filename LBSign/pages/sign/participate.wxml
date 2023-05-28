@@ -31,7 +31,8 @@
       <label class="weui-form-preview__label">结束时间</label>
       <text class="weui-form-preview__value">{{sign.endTime}}</text>
     </view>
-    <view class="weui-form-preview__item">
+
+    <view wx:if="{{sign.signCount != null}}" class="weui-form-preview__item">
       <label class="weui-form-preview__label">签到人数</label>
       <text class="weui-form-preview__value">{{sign.signCount}}</text>
     </view>
@@ -39,11 +40,11 @@
     <view wx:if="{{sign.validDistance!=0}}">
       <view class="weui-form-preview__item">
         <label class="weui-form-preview__label">签到经度</label>
-        <text class="weui-form-preview__value">{{sign.signLongitude}}</text>
+        <text class="weui-form-preview__value">{{sign.longitude}}</text>
       </view>
       <view class="weui-form-preview__item">
         <label class="weui-form-preview__label">签到纬度</label>
-        <text class="weui-form-preview__value">{{sign.signLatitude}}</text>
+        <text class="weui-form-preview__value">{{sign.latitude}}</text>
       </view>
       <view class="weui-form-preview__item">
         <label class="weui-form-preview__label">签到距离</label>

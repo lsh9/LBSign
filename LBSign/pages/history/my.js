@@ -90,6 +90,9 @@ Page({
    */
   onLoad(options) {
     that = this
+    wx.showLoading({
+      title: '正在加载',
+    })
     wx.request({
       url: app.domain + '/user/get_my_courses',
       method: 'POST',
@@ -130,6 +133,9 @@ Page({
             buttons: buttons
           })
         }
+      },
+      complete: ()=>{
+        wx.hideLoading();
       }
     })
   },

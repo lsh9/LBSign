@@ -45,38 +45,43 @@
           <label class="weui-form-preview__label">签到码</label>
           <text class="weui-form-preview__value">{{item.sign.signCode}}</text>
         </view>
-        <view id="p1" class="weui-form-preview__item">
+        <view id="p3" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">课程名称</label>
+          <text class="weui-form-preview__value">{{item.sign.course.courseName}}</text>
+        </view>
+        <!-- <view id="p1" class="weui-form-preview__item">
           <label class="weui-form-preview__label">开始时间</label>
           <text class="weui-form-preview__value">{{item.sign.startTime}}</text>
         </view>
         <view id="p2" class="weui-form-preview__item">
           <label class="weui-form-preview__label">结束时间</label>
           <text class="weui-form-preview__value">{{item.sign.endTime}}</text>
-        </view>
+        </view> -->
         <view id="p2" class="weui-form-preview__item">
           <label class="weui-form-preview__label">签到时间</label>
           <text class="weui-form-preview__value">{{item.signTime}}</text>
         </view>
 
-        <view wx:if="{{item.sign.validDistance!=0}}">
+        <!-- <view wx:if="{{item.sign.validDistance!=0}}">
           <view class="weui-form-preview__item">
             <label class="weui-form-preview__label">签到经度</label>
-            <text class="weui-form-preview__value">{{item.sign.signLongitude}}</text>
+            <text class="weui-form-preview__value">{{item.sign.longitude}}</text>
           </view>
           <view class="weui-form-preview__item">
             <label class="weui-form-preview__label">签到纬度</label>
-            <text class="weui-form-preview__value">{{item.sign.signLatitude}}</text>
+            <text class="weui-form-preview__value">{{item.sign.latitude}}</text>
           </view>
           <view class="weui-form-preview__item">
             <label class="weui-form-preview__label">签到距离</label>
             <text class="weui-form-preview__value">{{item.sign.validDistance}}米</text>
           </view>
+        </view> -->
 
-        </view>
       </view>
 
       <view class="weui-form-preview__ft">
         <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_default" aria-role="button" bindtap="handleGoTo" data-signCode="{{item.sign.signCode}}">查看</button>
+        <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_default" aria-role="button" open-type="share" data-signCode="{{item.sign.signCode}}">分享</button>
       </view>
 
     </view>

@@ -57,6 +57,7 @@
       <view class="weui-form-preview__ft">
         <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_default" aria-role="button" bindtap="handleDownload" data-signId="{{item.signId}}">下载</button>
         <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_default" aria-role="button" bindtap="handleGoTo" data-signCode="{{item.signCode}}">查看</button>
+        <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_default" aria-role="button" open-type="share" data-signCode="{{item.signCode}}">分享</button>
         <button id="{{index}}" class="weui-form-preview__btn weui-form-preview__btn_warning" aria-role="button" bindtap="handleDelete" data-signId="{{item.signId}}">删除</button>
       </view>
 
