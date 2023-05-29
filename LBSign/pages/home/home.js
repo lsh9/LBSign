@@ -119,11 +119,16 @@ Page({
               })
               app.globalData.userid = resp.user.userid
               app.globalData.user = resp.user
-
               wx.showToast({
                 title: '连接成功',
               })
+            } else {
+              wx.showToast({
+                title: '服务器连接失败，请等待后台维护',
+                icon: 'none'
+              })
             }
+
           }
         })
 
@@ -132,6 +137,7 @@ Page({
         console.log("登陆失败：", res)
         wx.showToast({
           title: '服务器连接失败，请等待后台维护',
+          icon: 'none'
         })
       }
     })
@@ -155,8 +161,12 @@ Page({
       login: app.globalData.login,
       userName: app.globalData.user.userName,
       userNumber: app.globalData.user.userNumber,
-      avatarUrl: app.globalData.user.avatarUrl,
     });
+    if (app.globalData.user.avatarUrl) {
+      that.setData({
+        avatarUrl: app.domain + app.globalData.user.avatarUrl,
+      })
+    }
 
     // 链接进入，参数有签到码
     console.log("检查邀请码")
@@ -194,8 +204,12 @@ Page({
       this.setData({
         userName: user.userName,
         userNumber: user.userNumber,
-        avatarUrl: user.avatarUrl,
       })
+      if (user.avatarUrl) {
+        that.setData({
+          avatarUrl: app.domain + app.globalData.user.avatarUrl,
+        })
+      }
     }
 
     // 读取剪切板内容
@@ -250,8 +264,12 @@ Page({
       this.setData({
         userName: user.userName,
         userNumber: user.userNumber,
-        avatarUrl: user.avatarUrl,
       })
+      if (user.avatarUrl) {
+        that.setData({
+          avatarUrl: app.domain + app.globalData.user.avatarUrl,
+        })
+      }
     }
   },
 

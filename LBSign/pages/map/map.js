@@ -3,8 +3,6 @@ let that = null // 页面this指针变量
 
 Page({
   data: {
-    //
-    useClass: false,
 
     longitude: 116.38,
     latitude: 39.90,
@@ -38,11 +36,11 @@ Page({
   },
 
   handleRegionChange() {
+    console.log("handleRegionChange")
     that = this
     let map = wx.createMapContext('map')
 
     map.getCenterLocation({
-      iconPath: "/assets/local.png",
       success: (res) => {
         let lon = res.longitude
         let lat = res.latitude
@@ -135,6 +133,13 @@ Page({
   },
 
   handleCreateSignTap() {
+    if(!app.globalData.userid){
+      wx.showToast({
+        title: '请先登录',
+        icon: "error"
+      })
+      return;
+    }
     var params = {
       lon: this.data.longitude,
       lat: this.data.latitude,

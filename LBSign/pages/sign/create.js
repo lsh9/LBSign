@@ -40,10 +40,10 @@ Page({
         dialogMessage: "签到名称不允许为空！"
       })
       return
-    } else if (that.data.validTime > 60 || that.data.validTime < 1) {
+    } else if (that.data.validTime > 1440 || that.data.validTime < 1) {
       that.setData({
         showDialog: true,
-        dialogMessage: "有效时间只允许在1-60分钟"
+        dialogMessage: "有效时间只允许在1-1440分钟"
       })
       return
     }
@@ -55,6 +55,9 @@ Page({
     console.log(date, startTimeStamps, endTimeStamps)
     console.log(that.data)
 
+    wx.showLoading({
+      title: '创建中，请稍等',
+    })
     wx.request({
       url: app.domain + "/sign/create",
       method: "POST",
@@ -69,10 +72,8 @@ Page({
       },
       success: (res) => {
         var resp = res.data
-
         if (resp.success) {
           // 创建成功
-
           wx.showModal({
             title: '签到码：' + resp.sign.signCode,
             content: "是否复制到剪切板？",
@@ -114,13 +115,18 @@ Page({
                     wx.redirectTo({
                       url: '/pages/course/detail?course=' + course,
                     })
+                  },
+                  complete: () => {
+                    wx.hideLoading();
                   }
                 })
               }
             }
           })
-
         }
+      },
+      complete: () => {
+        wx.hideLoading();
       }
     })
   },

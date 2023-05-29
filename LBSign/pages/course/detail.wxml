@@ -37,21 +37,20 @@
           <text class="weui-form-preview__value">{{item.signCount}}</text>
         </view>
 
-        <view wx:if="{{item.validDistance!=0}}">
+        <!-- <view wx:if="{{item.validDistance!=0}}">
           <view class="weui-form-preview__item">
             <label class="weui-form-preview__label">签到经度</label>
-            <text class="weui-form-preview__value">{{item.signLongitude}}</text>
+            <text class="weui-form-preview__value">{{item.longitude}}</text>
           </view>
           <view class="weui-form-preview__item">
             <label class="weui-form-preview__label">签到纬度</label>
-            <text class="weui-form-preview__value">{{item.signLatitude}}</text>
+            <text class="weui-form-preview__value">{{item.latitude}}</text>
           </view>
           <view class="weui-form-preview__item">
             <label class="weui-form-preview__label">签到距离</label>
             <text class="weui-form-preview__value">{{item.validDistance}}米</text>
           </view>
-
-        </view>
+        </view> -->
       </view>
 
       <view class="weui-form-preview__ft">

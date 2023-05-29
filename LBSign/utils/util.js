@@ -1,10 +1,13 @@
 const formatTime = date => {
+  const addZero = (num) => {
+    return num < 10 ? ("0" + num) : num;
+  }
   var Y = date.getFullYear() + '-';
   var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
   var D = date.getDate() + ' ';
-  var h = date.getHours() + ':';
-  var m = date.getMinutes() + ':';
-  var s = date.getSeconds();
+  var h = addZero(date.getHours()) + ':';
+  var m = addZero(date.getMinutes()) + ':';
+  var s = addZero(date.getSeconds());
 
   return Y + M + D + h + m + s
 }

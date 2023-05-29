@@ -9,6 +9,8 @@ Page({
     avatarUrl: defaultAvatarUrl,
     theme: wx.getSystemInfoSync().theme,
 
+    url: null
+
   },
 
   /**
@@ -26,19 +28,43 @@ Page({
       userName: app.globalData.user.userName,
       userNumber: app.globalData.user.userNumber
     })
-    if (app.globalData.user.avatarUrl){
+    if (app.globalData.user.avatarUrl) {
       that.setData({
-        avatarUrl: app.globalData.user.avatarUrl
+        avatarUrl: app.domain + app.globalData.user.avatarUrl
       })
     }
   },
 
   // 选择头像
   onChooseAvatar(e) {
+    that = this;
     console.log(e)
     var avatarUrl = e.detail.avatarUrl
     this.setData({
       avatarUrl: avatarUrl,
+    });
+    wx.showLoading({
+      title: '正在保存头像',
+      mask: true
+    })
+    wx.uploadFile({
+      url: app.domain + '/files/upload',
+      filePath: avatarUrl,
+      name: 'file',
+      success: function (res) {
+        var resp = JSON.parse(res.data)
+        console.log("头像url：", resp)
+        if (resp.success) {
+          console.log("头像url：", resp)
+          that.setData({
+            url: resp.url,
+            avatarUrl: app.domain + resp.url
+          });
+        }
+      },
+      complete: () => {
+        wx.hideLoading();
+      }
     })
   },
 
@@ -58,8 +84,10 @@ Page({
 
   // 保存编辑结果
   handleEdit() {
-    console.log(this.data)
 
+    wx.showLoading({
+      title: '正在保存',
+    })
     wx.request({
       url: app.domain + '/user/edit',
       method: "POST",
@@ -67,18 +95,21 @@ Page({
         userid: app.globalData.userid,
         userName: this.data.userName,
         userNumber: this.data.userNumber,
-        // avatarUrl: this.data.avatarUrl,
+        avatarUrl: this.data.url,
       },
       success: (res) => {
         if (res.data.success) {
           app.globalData.user.userName = this.data.userName;
           app.globalData.user.userNumber = this.data.userNumber;
-          app.globalData.user.avatarUrl = this.data.avatarUrl;
+          app.globalData.user.avatarUrl = this.data.url;
           wx.showToast({
             title: '编辑成功',
           })
         }
         wx.navigateBack()
+      },
+      complete:()=>{
+        wx.hideLoading();
       }
     })
   },

@@ -64,3 +64,5 @@
     <button class="weui-form-preview__btn weui-form-preview__btn_primary" aria-role="button" open-type="share">分享</button>
   </view>
 </view>
+
+<map wx:if="{{sign.validDistance}}" id="map" longitude="{{lon}}" latitude="{{lat}}" show-location="true" circles="{{[circle]}}" markers="{{[marker]}}"></map>

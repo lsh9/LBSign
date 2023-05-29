@@ -11,11 +11,23 @@ Page({
     timer: null,
     sign: null,
     remainTime: 0,
-    valid: true,
+    inTime: true,
 
-    lon: null,
-    lat: null,
-    distance: 0
+    lon: 116,
+    lat: 39,
+    marker: {
+      id: 0,
+      longitude: 116.38,
+      latitude: 39.90,
+      iconPath: '/assets/local.png',
+      width: '22',
+      height: '22'
+    },
+    circle: {
+      longitude: 0,
+      latitude: 0,
+      radius: 200
+    },
   },
 
   // 按下签到按钮进行签到
@@ -25,7 +37,7 @@ Page({
     var userNumber = app.globalData.user.userNumber;
     var sign = that.data.sign;
 
-    if (!that.data.valid) {
+    if (!that.data.inTime) {
       wx.showToast({
         title: '签到已超时',
         icon: "error",
@@ -68,11 +80,11 @@ Page({
 
           var lon = res.longitude
           var lat = res.latitude
-          var distance = util.getDistance(lat, lon, sign.signLatitude, sign.signLongitude)
+          var distance = util.getDistance(lat, lon, sign.latitude, sign.longitude)
           console.log("实际距离：", distance)
           if (distance > sign.validDistance) {
             wx.showToast({
-              title: '签到失败！\n实际距离:' + parseInt(distance),
+              title: '签到失败！\n实际距离:' + parseInt(distance) + "米",
               icon: 'none'
             })
             return;
@@ -87,15 +99,15 @@ Page({
       })
     }
 
-    wx.showLoading({
-      title: '正在签到，请稍后',
-    })
 
 
   },
 
   participate(params) {
     var timestamps = parseInt(new Date().getTime() / 1000);
+    wx.showLoading({
+      title: '正在签到',
+    })
     wx.request({
       url: app.domain + "/sign/participate",
       method: "POST",
@@ -124,6 +136,9 @@ Page({
             icon: "error"
           })
         }
+      },
+      complete: () => {
+        wx.hideLoading();
       }
     })
   },
@@ -141,10 +156,11 @@ Page({
         const addZero = (num) => {
           return num < 10 ? ("0" + num) : num;
         }
-        var minutes = addZero(parseInt(remainSeconds / 60));
+        var hours = addZero(parseInt(remainSeconds / 3600));
+        var minutes = addZero(parseInt(remainSeconds / 60 % 60));
         var seconds = addZero(parseInt(remainSeconds % 60));
         that.setData({
-          remainTime: minutes + ":" + seconds
+          remainTime: hours + ":" + minutes + ":" + seconds
         })
         //在倒计时还未到0时，这中间可以做其他的事情，按项目需求来
         if (remainSeconds <= 0) {
@@ -159,6 +175,41 @@ Page({
         }
       }, 1000)
     })
+  },
+
+  setLocation() {
+    that = this;
+    let map = wx.createMapContext('map', this);
+    console.log(map)
+    if (that.data.sign.validDistance > 0) {
+      wx.getLocation({
+        type: "gcj2",
+        success: (res) => {
+          console.log("定位点：", res)
+          map.getCenterLocation({
+            success: (res) => {
+              console.log("中心点：", res)
+            },
+          });
+          that.setData({
+            lon: res.longitude,
+            lat: res.latitude,
+            ['circle.longitude']: that.data.sign.longitude,
+            ['circle.latitude']: that.data.sign.latitude,
+            ['circle.radius']: that.data.sign.validDistance,
+            ['marker.longitude']: that.data.sign.longitude,
+            ['marker.latitude']: that.data.sign.latitude,
+          });
+          map.moveToLocation({
+            longitude: that.data.lon,
+            latitude: that.data.lat,
+            success: () => {
+              console.log("移动后：", that.data.lon, that.data.lat)
+            }
+          });
+        }
+      })
+    }
   },
 
   /**
@@ -189,6 +240,7 @@ Page({
                 sign: sign,
                 valid: true
               })
+              this.setLocation();
               this.countDown();
             } else {
               // 签到码无效
@@ -196,16 +248,18 @@ Page({
                 title: '签到已超时',
                 content: '点击回到主页',
                 showCancel: false,
-                complete: (res) => {
+                complete: () => {
                   wx.redirectTo({
                     url: '/pages/home/home',
                   })
                 }
               })
-
             }
           }
         },
+        complete: () => {
+          wx.hideLoading();
+        }
       })
     } else {
       var sign = JSON.parse(options.sign);
@@ -213,8 +267,9 @@ Page({
       that.setData({
         timer: null,
         sign: sign,
-        valid: true
+        inTime: true
       })
+      this.setLocation();
       this.countDown();
     }
   },

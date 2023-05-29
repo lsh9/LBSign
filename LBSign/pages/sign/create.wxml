@@ -27,7 +27,7 @@
         <view class="weui-label">有效时间</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder-class="weui-input__placeholder" type="number" placeholder="请输入签到有效时间（1-60分钟）" bindinput="handleValidTimeInput"/>
+        <input class="weui-input" placeholder-class="weui-input__placeholder" type="number" placeholder="请输入签到有效时间（1-1440分钟）" bindinput="handleValidTimeInput"/>
       </view>
     </view>
 

@@ -49,6 +49,9 @@ Page({
         break;
       case 2:
         // 删除
+        wx.showLoading({
+          title: '正在删除课程',
+        })
         wx.request({
           url: app.domain + "/course/delete",
           method: "POST",
@@ -72,11 +75,13 @@ Page({
               })
             }
 
+          },
+          complete: () => {
+            wx.hideLoading();
           }
+
         })
-        wx.showLoading({
-          title: '正在删除课程',
-        })
+
         break;
       default:
         break;

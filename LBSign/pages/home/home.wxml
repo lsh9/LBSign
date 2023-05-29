@@ -26,12 +26,12 @@
   <view class="container">
 
     <view class="userinfo">
-      <view class="userinfo-avatar" bindtap="bindAvatarTap">
+      <!-- <view class="userinfo-avatar" bindtap="bindAvatarTap">
         <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <!-- <button class="avatar-wrapper" bindtap="bindAvatarTap">
+      </view> -->
+      <button class="avatar-wrapper" bindtap="bindAvatarTap">
         <image class="avatar" src="{{avatarUrl}}"></image>
-      </button> -->
+      </button>
 
       <block wx:if="{{userName && userNumber}}" style="text-align: center;">
         <view>
@@ -45,7 +45,7 @@
         <!-- <view>
           {{nickName}}
         </view> -->
-        <open-data type="userNickName"></open-data>
+        <!-- <open-data type="userNickName"></open-data> -->
       </block>
     </view>
 

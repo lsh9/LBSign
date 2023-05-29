@@ -15,9 +15,7 @@ App({
 
     // 登录
     console.log("连接到服务器...")
-    wx.showLoading({
-      title: '正在连接到服务器...',
-    })
+
     wx.login({
       success: (res) => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -35,16 +33,15 @@ App({
               this.globalData.user = resp.user
               this.globalData.login = true
               console.log("连接成功！")
+              wx.showToast({
+                title: '连接成功',
+              })
               waitOnLoad()
             }
           }
         })
-        wx.showToast({
-          title: '连接成功',
-        })
       },
       fail: (res) => {
-        console.log("登陆失败：", res)
         wx.showToast({
           title: '服务器连接失败，请等待后台维护',
         })

@@ -1,1 +1,5 @@
 /* pages/sign/participate.wxss */
+map{
+	width: 100%;
+	height: 30vh;
+}
