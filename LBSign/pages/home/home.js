@@ -69,7 +69,7 @@ Page({
       },
       success: (res) => {
         var resp = res.data;
-        console.log("通过签到码获取签到：", resp.success)
+        console.log("通过签到码获取签到：", resp)
         if (resp.success) {
           if (resp.sign) {
             var sign = JSON.stringify(resp.sign)
@@ -179,6 +179,7 @@ Page({
         },
         success: (res) => {
           var resp = res.data;
+          console.log(resp)
           if (resp.success) {
             if (resp.sign) {
               var sign = JSON.stringify(resp.sign)

@@ -49,6 +49,14 @@
           <label class="weui-form-preview__label">课程名称</label>
           <text class="weui-form-preview__value">{{item.sign.course.courseName}}</text>
         </view>
+        <view id="p3" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">签到名称</label>
+          <text class="weui-form-preview__value">{{item.signUserName}}</text>
+        </view>
+        <view id="p3" class="weui-form-preview__item">
+          <label class="weui-form-preview__label">签到学号</label>
+          <text class="weui-form-preview__value">{{item.signUserNumber}}</text>
+        </view>
         <!-- <view id="p1" class="weui-form-preview__item">
           <label class="weui-form-preview__label">开始时间</label>
           <text class="weui-form-preview__value">{{item.sign.startTime}}</text>

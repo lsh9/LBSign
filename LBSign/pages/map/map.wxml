@@ -3,7 +3,14 @@
 
 <view class="remain-part">
 
-  <mp-cells title="定位设置">
+  <mp-cells title="设置">
+    <mp-cell>
+      <picker mode="selector" bindchange="handleCourseChange" value="{{courseIndex}}" range="{{coursePickerList}}">
+        <view class="picker">
+          选择课程：{{coursePickerList[courseIndex]}}
+        </view>
+      </picker>
+    </mp-cell>
     <mp-cell>
       <picker mode="selector" bindchange="handlePickerChange" value="{{index}}" range="{{options}}">
         <view class="picker">
@@ -14,6 +21,7 @@
     <mp-cell wx:if="{{index!=0}}" title="有效距离（米）">
       <slider min="50" max="500" step="10" value="{{validDistance}}" show-value="true" bindchanging="handleSliderChanging"></slider>
     </mp-cell>
+
   </mp-cells>
 
   <button class="weui-btn" type="primary" bindtap="handleCreateSignTap">发起签到</button>

@@ -125,6 +125,7 @@ Page({
         if (res.data.success) {
           wx.showToast({
             title: '签到成功',
+            duration: 3000
           })
           that.setData({
             ["sign.signCount"]: res.data.sign.signCount
@@ -170,7 +171,7 @@ Page({
           //关闭定时器之后，可作其他处理codes go here
           that.setData({
             remainTime: "签到超时",
-            valid: false
+            inTime: false
           })
         }
       }, 1000)
@@ -221,6 +222,7 @@ Page({
     if (signCode) {
       wx.showLoading({
         title: '正在查询',
+        mask: true
       })
       wx.request({
         url: app.domain + "/sign/get_sign_by_signCode",
@@ -232,22 +234,19 @@ Page({
           var resp = res.data;
           if (resp.success) {
             var sign = resp.sign
-            console.log(sign)
             if (sign) {
               util.transformSign(sign);
               that.setData({
                 timer: null,
                 sign: sign,
-                valid: true
+                inTime: true
               })
               this.setLocation();
               this.countDown();
             } else {
               // 签到码无效
-              wx.showModal({
+              wx.showToast({
                 title: '签到已超时',
-                content: '点击回到主页',
-                showCancel: false,
                 complete: () => {
                   wx.redirectTo({
                     url: '/pages/home/home',

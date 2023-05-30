@@ -3,7 +3,7 @@
   "projectname": "LBSign",
   "setting": {
     "compileHotReLoad": false,
-    "urlCheck": true
+    "urlCheck": false
   },
   "libVersion": "2.32.0"
 }

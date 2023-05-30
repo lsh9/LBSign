@@ -3,8 +3,6 @@ let that = null;
 
 Page({
   data: {
-    isLocated: false,
-
     courseId: null,
     location: {},
     course: null,
@@ -27,7 +25,7 @@ Page({
   handleValidTimeInput(e) {
     that = this;
     that.setData({
-      validTime: e.detail.value
+      validTime: Number(e.detail.value)
     })
   },
 
@@ -52,7 +50,6 @@ Page({
     var startTimeStamps = date.getTime() / 1000;
     var endTimeStamps = startTimeStamps + 60 * that.data.validTime;
 
-    console.log(date, startTimeStamps, endTimeStamps)
     console.log(that.data)
 
     wx.showLoading({
@@ -124,6 +121,13 @@ Page({
             }
           })
         }
+        else{
+        wx.showToast({
+          title: '发起签到失败',
+          icon: "error"
+        });
+
+        }
       },
       complete: () => {
         wx.hideLoading();
@@ -154,7 +158,7 @@ Page({
         longitude: params.lon || null,
         distance: params.dis || null
       },
-      courseId: params.courseId || app.globalData.user.defaultCourseId,
+      courseId: params.courseId,
       course: params.course || null
     })
     console.log(that.data)

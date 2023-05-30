@@ -26,17 +26,35 @@ Page({
     console.log("滑块按钮：", btnIndex, course)
     switch (btnIndex) {
       case 0:
-        // 签到
-        var params = {
-          course: course
-        };
-        if (course.validDistance != 0) {
-          params.lon = course.courseLongitude;
-          params.lat = course.courseLatitude;
-          params.dis = course.validDistance;
-        }
-        wx.navigateTo({
-          url: '/pages/sign/create?params=' + JSON.stringify(params),
+        // 下载
+        wx.showLoading({
+          title: '下载中，请稍后',
+        });
+        wx.request({
+          url: app.domain + "/course/download_course_file",
+          method: "POST",
+          data: {
+            courseId: course.courseId
+          },
+          success: (res) => {
+            if (res.data.success) {
+              var url = app.domain + res.data.url
+              console.log("下载地址", url)
+    
+              wx.setClipboardData({
+                data: url,
+                success(res) {
+                  wx.showToast({
+                    title: '下载地址：' + url + '  已复制到剪切板',
+                    icon: 'none'
+                  })
+                }
+              })
+            }
+          },
+          complete:()=>{
+            wx.hideLoading();
+          }
         })
 
         break;
@@ -113,7 +131,7 @@ Page({
           var buttons = []
           for (var i = 0; i < n; i++) {
             buttons[i] = [{
-                text: "签到",
+                text: "下载",
                 data: {
                   index: i
                 }

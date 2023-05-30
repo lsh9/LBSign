@@ -6,7 +6,6 @@
     "pages/history/my",
     "pages/history/other",
     "pages/course/create",
-    "pages/course/edit",
     "pages/course/detail",
     "pages/sign/create",
     "pages/sign/participate"

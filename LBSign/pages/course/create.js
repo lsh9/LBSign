@@ -12,7 +12,6 @@ Page({
       latitude: null,
       longitude: null
     },
-    validDistance: 0,
     isEditing: false,
   },
 
@@ -69,15 +68,6 @@ Page({
     that.setData({
       isLocated: false,
       location: null,
-      validDistance: 0,
-    })
-  },
-
-  // 处理滑块
-  handleSliderChanging(e) {
-    that = this;
-    that.setData({
-      validDistance: e.detail.value
     })
   },
 
@@ -104,7 +94,6 @@ Page({
         courseLocationAddress: that.data.location.address,
         courseLongitude: that.data.location.longitude * 1e6 || null,
         courseLatitude: that.data.location.latitude * 1e6 || null,
-        validDistance: that.data.validDistance,
       },
       success: (res) => {
         var resp = res.data
@@ -142,7 +131,6 @@ Page({
         courseLocationAddress: that.data.location.address,
         courseLongitude: that.data.location.longitude * 1e6 || null,
         courseLatitude: that.data.location.latitude * 1e6 || null,
-        validDistance: that.data.validDistance
       },
       success: (res) => {
         var resp = res.data
@@ -175,7 +163,7 @@ Page({
       var course = JSON.parse(options.course)
       console.log(course)
       that.setData({
-        isLocated: course.validDistance!=0,
+        isLocated: (course.courseLatitude && course.courseLongitude),
         isEditing: true,
         title: "编辑课程",
         courseId: course.courseId,
@@ -187,7 +175,6 @@ Page({
           name: course.courseLocationName,
           address: course.courseLocationAddress,
         },
-        validDistance: course.validDistance,
       })
 
     }
