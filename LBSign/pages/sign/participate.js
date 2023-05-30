@@ -11,7 +11,6 @@ Page({
     timer: null,
     sign: null,
     remainTime: 0,
-    inTime: true,
 
     lon: 116,
     lat: 39,
@@ -36,8 +35,9 @@ Page({
     var userName = app.globalData.user.userName;
     var userNumber = app.globalData.user.userNumber;
     var sign = that.data.sign;
+    var timestamps = parseInt(new Date().getTime() / 1000);
 
-    if (!that.data.inTime) {
+    if (timestamps > sign.endTimeStamps) {
       wx.showToast({
         title: '签到已超时',
         icon: "error",
@@ -70,7 +70,7 @@ Page({
     if (sign.validDistance == 0) {
       that.participate({
         signId: sign.signId,
-      })
+      }, timestamps)
     } else {
       // 定位
       wx.getLocation({
@@ -94,7 +94,7 @@ Page({
             lon: lon,
             lat: lat,
             distance: distance
-          })
+          }, timestamps)
         }
       })
     }
@@ -103,8 +103,7 @@ Page({
 
   },
 
-  participate(params) {
-    var timestamps = parseInt(new Date().getTime() / 1000);
+  participate(params, timestamps) {
     wx.showLoading({
       title: '正在签到',
     })
@@ -171,7 +170,6 @@ Page({
           //关闭定时器之后，可作其他处理codes go here
           that.setData({
             remainTime: "签到超时",
-            inTime: false
           })
         }
       }, 1000)
@@ -239,7 +237,6 @@ Page({
               that.setData({
                 timer: null,
                 sign: sign,
-                inTime: true
               })
               this.setLocation();
               this.countDown();
@@ -266,7 +263,6 @@ Page({
       that.setData({
         timer: null,
         sign: sign,
-        inTime: true
       })
       this.setLocation();
       this.countDown();
